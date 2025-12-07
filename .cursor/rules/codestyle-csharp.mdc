@@ -1,0 +1,448 @@
+---
+alwaysApply: true
+---
+# C# Coding Style Rules
+
+## Core Principles
+
+You are a C# code assistant following strict coding standards based on Microsoft conventions and company-specific guidelines.
+
+## STRICTLY PROHIBITED
+
+- **NEVER** develop custom loggers
+- **NEVER** develop custom integration buses/mechanisms from scratch (web services are fine, but not the underlying integration mechanism)
+
+## Naming Conventions
+
+### Case Rules
+
+- **PascalCase**: Namespaces, classes, methods, public/protected properties, static fields, constants, enums, events, delegates, interfaces, resources, type parameters
+- **camelCase**: Variables, method parameters, internal properties, local variables
+- **_camelCase** (with underscore prefix): Private fields only
+
+### Specific Rules by Element
+
+#### Classes & Structures
+```csharp
+// Use nouns in PascalCase
+public class ComplexNumber { }
+public struct ComplexStruct { }
+```
+
+#### Namespaces
+```csharp
+// Format: CompanyDeveloper.Component.CompanyClient.ProjectName
+namespace Norbit.Crm.GalacticEmpire.DeathStarPlugins
+
+// Use plural for collections of similar entities
+// Use singular for subsystems
+namespace Microsoft.Sample.Windows10
+```
+
+#### Methods
+```csharp
+// Use Verb+Noun pattern in PascalCase
+public void Print() { }
+public void ProcessItem() { }
+public bool IsShortPants() { } // Boolean methods: use Is/Can/Has prefix
+```
+
+#### Properties
+```csharp
+// Use nouns/adjectives in PascalCase
+public string CustomerName { get; set; }
+public ItemCollection Items { get; set; } // Collections in plural
+public bool CanRead { get; set; } // Boolean: Is/Can/Has prefix
+```
+
+#### Fields
+```csharp
+// Private fields: _camelCase
+private string _name;
+
+// All static fields: PascalCase (regardless of access modifier)
+private static readonly string EntityName = "incident";
+```
+
+#### Events
+```csharp
+// Use verbs: present tense for "before", past tense for "after"
+// NO "Before"/"After" prefixes
+// NO "On" prefix (use in handlers only)
+public event WindowClosing // before closing
+public event WindowClosed  // after closed
+
+// Custom EventArgs must have "EventArgs" suffix
+public class KarmaValueEventArgs : EventArgs { }
+```
+
+#### Delegates
+```csharp
+// Add "EventHandler" suffix for event delegates
+public delegate void WindowClosedEventHandler(object sender, EventArgs e);
+
+// Add "Callback" suffix for non-event delegates
+public delegate void ProcessCallback();
+
+// NEVER add "Delegate" suffix
+```
+
+#### Interfaces
+```csharp
+// Noun with "I" prefix in PascalCase
+public interface IDictionary { }
+```
+
+#### Constants
+```csharp
+// Nouns in PascalCase
+public const string MessageText = "A";
+public const double Pi = 3.14159;
+```
+
+#### Enums
+```csharp
+// Singular for simple enums, plural for flags
+// ALWAYS explicitly set numeric values
+[Flags]
+public enum ConsoleModifiers : int
+{
+    Alt = 0,
+    Control = 1
+}
+```
+
+#### Type Parameters
+```csharp
+// Use "T" prefix, meaningful names if not obvious
+public class List<TItem> { }
+public interface IPolicy<TPolicy> { }
+```
+
+## Code Layout
+
+### Indentation & Spacing
+
+```csharp
+// Use TABS for indentation (4 spaces equivalent)
+// One statement per line
+ShowGun();
+HideEyes();
+
+// One variable declaration per line
+int customerId;
+string userName;
+
+// Empty line before methods, properties, and control structures
+public void FirstMethod()
+{
+    // code
+}
+
+public void SecondMethod()
+{
+    // code
+}
+```
+
+### Braces
+
+```csharp
+// ALWAYS use Egyptian/Allman style
+// ALWAYS use braces even for single-line if statements
+if (hasAPen && hasAnApple)
+{
+    return applePen;
+}
+
+// Use parentheses for clarity in complex expressions
+if ((myValue > yourValue) && (myCount > yourCount))
+{
+    // code
+}
+```
+
+### Long Lines
+
+```csharp
+// Break long method calls into multiple lines
+var count = RoadMapsRepository.Count(
+    userId,
+    filter.Privilege,
+    filter.SearchText,
+    filter.ParentInitiative,
+    filter.IsTypicalRm,
+    filter.StatusCode);
+
+// Break LINQ queries and method chains
+Subscribe
+    .ToMessage(Message.Associate)
+    .ForEntity("new_initiative")
+    .WithAssociationName("new_new_initiative_new_region")
+    .When(PluginStage.PostOperation)
+    .Execute(RecalcRegionsCounter);
+```
+
+## Comments
+
+### XMLDoc Requirements
+
+```csharp
+/// <summary>
+/// Обязательный комментарий для всех public/protected методов, свойств и полей.
+/// Используй правильную грамматику, начинай с заглавной, заканчивай точкой.
+/// </summary>
+public void ProcessData() { }
+
+// Для приватных полей можно использовать простые комментарии
+// Один пробел после разделителя комментария
+private int _count; // Комментарий на отдельной строке предпочтительнее
+```
+
+## Best Practices
+
+### Use `var` Keyword
+
+```csharp
+// Prefer implicit typing with var in most cases
+var customer = new Customer();
+var items = GetItems();
+
+// Including in loops
+foreach (var item in items)
+{
+    // process
+}
+```
+
+### String Operations
+
+```csharp
+// Use string interpolation (or String.Format for older versions)
+var message = $"Hello, {userName}!";
+
+// For long strings, use concatenation or @ literal
+var query = "SELECT " +
+            "money, " +
+            "jewellery " +
+            "FROM WhiteManHouse";
+
+var multiline = @"Long text
+that spans multiple
+lines";
+```
+
+### Date Formatting
+
+```csharp
+// ALWAYS specify format when converting dates
+var dateString = DateTime.Now.ToString("dd'.'MM'.'yyyy");
+```
+
+### Object Initialization
+
+```csharp
+// Use object initializers with each property on separate line
+var person = new Person
+{
+    Name = "John",
+    Age = 30,
+    Address = new Address
+    {
+        Street = "Main St",
+        City = "New York"
+    }
+};
+```
+
+### Exception Handling
+
+```csharp
+// Use try-catch for exception handling
+try
+{
+    RobTheBank();
+}
+catch (SecurityException ex)
+{
+    RunAway();
+    throw; // Preserve stack trace - throw without object
+}
+
+// When creating new exception, pass inner exception
+catch (Exception ex)
+{
+    throw new CustomException("Operation failed", ex);
+}
+
+// Use using for IDisposable objects
+using (var connection = new SqlConnection(connectionString))
+{
+    // work with connection
+}
+```
+
+### Null Checking
+
+```csharp
+// Use ?? operator for non-nullable types
+var value = possiblyNullValue ?? defaultValue;
+
+// Use null-conditional operator for nullable types
+var length = text?.Length;
+
+// Check strings with IsNullOrEmpty
+if (string.IsNullOrEmpty(userName))
+{
+    // handle
+}
+```
+
+### Argument Validation
+
+```csharp
+// MANDATORY for all public and protected methods
+public void ProcessOrder(Order order, int userId)
+{
+    Argument.NotNull(order, "Order is required.");
+    Argument.Require(userId > 0, "Valid user ID is required.");
+    
+    // method implementation
+}
+
+// Optional for private methods (but recommended)
+// Use [NotNull] and [CanBeNull] attributes with ReSharper
+```
+
+### Magic Numbers
+
+```csharp
+// NEVER use magic numbers - always extract to constants or enums
+const int MaxRetries = 3;
+const decimal TaxRate = 0.20m;
+
+public enum OrderStatus
+{
+    Pending = 0,
+    Confirmed = 1,
+    Shipped = 2
+}
+```
+
+### Ternary Operator
+
+```csharp
+// Split across lines for readability
+var result = condition
+    ? valueIfTrue
+    : valueIfFalse;
+```
+
+### Switch Statements
+
+```csharp
+// ALWAYS include all possible cases explicitly
+// ALWAYS include default case with exception
+switch (status)
+{
+    case OrderStatus.Pending:
+        return "Waiting";
+    case OrderStatus.Confirmed:
+        return "Processing";
+    case OrderStatus.Shipped:
+        return "Delivered";
+    default:
+        throw new InvalidOperationException(
+            $"Unexpected status: {status}");
+}
+```
+
+## Code Generation Instructions
+
+When generating C# code:
+
+1. **Always validate input arguments** in public/protected methods
+2. **Use var** unless explicit typing is required
+3. **Add XMLDoc comments** to all public members
+4. **Follow naming conventions** strictly
+5. **Use descriptive names** - method names should be verb+noun
+6. **Break long lines** for readability
+7. **Always use braces** even for single-line blocks
+8. **Avoid magic numbers** - use constants or enums
+9. **Include default case** in switch statements with exceptions
+10. **Use appropriate null-checking** patterns
+
+## Anti-Patterns to Avoid
+
+- ❌ Multiple statements on one line
+- ❌ Multiple variable declarations on one line
+- ❌ If statements without braces
+- ❌ Magic numbers in code
+- ❌ Methods named Foo(), Func1(), etc.
+- ❌ Switch statements without default case
+- ❌ Custom logger implementations
+- ❌ Custom integration bus implementations
+- ❌ Comments without proper grammar/punctuation
+- ❌ Private fields without underscore prefix
+- ❌ Date conversions without format specification
+
+## Example: Complete Class
+
+```csharp
+namespace Norbit.Crm.Client.OrderManagement
+{
+    /// <summary>
+    /// Обрабатывает заказы клиентов.
+    /// </summary>
+    public class OrderProcessor
+    {
+        private readonly ILogger _logger;
+        private readonly IRepository _repository;
+        
+        private static readonly int MaxRetryCount = 3;
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса OrderProcessor.
+        /// </summary>
+        public OrderProcessor(ILogger logger, IRepository repository)
+        {
+            Argument.NotNull(logger, "Logger is required.");
+            Argument.NotNull(repository, "Repository is required.");
+            
+            _logger = logger;
+            _repository = repository;
+        }
+        
+        /// <summary>
+        /// Обрабатывает заказ.
+        /// </summary>
+        public Result ProcessOrder(Order order)
+        {
+            Argument.NotNull(order, "Order is required.");
+            
+            try
+            {
+                var isValid = ValidateOrder(order);
+                
+                if (!isValid)
+                {
+                    return Result.Failure("Invalid order");
+                }
+                
+                _repository.Save(order);
+                return Result.Success();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to process order");
+                throw;
+            }
+        }
+        
+        private bool ValidateOrder(Order order)
+        {
+            return order.Items?.Count > 0 && order.TotalAmount > 0;
+        }
+    }
+}
+```
