@@ -8,7 +8,7 @@ namespace Lab4.Library
 	/// <typeparam name="T">Тип сравниваемых элементов.</typeparam>
 	/// <param name="first">Первый элемент.</param>
 	/// <param name="second">Второй элемент.</param>
-	/// <returns>Отрицательное число, если first меньше second; 0, если равны; положительное, если first больше second.</returns>
+	/// <returns>Отрицательное число, если первый меньше второго; 0, если равны; положительное, если первый больше второго.</returns>
 	public delegate int ComparisonDelegate<T>(T first, T second);
 
 	/// <summary>

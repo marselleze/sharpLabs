@@ -49,7 +49,7 @@ namespace Lab3
 		private static void DisplayMenu()
 		{
 			Console.Clear();
-			Console.WriteLine("=== ЛАБОРАТОРНАЯ РАБОТА 3 ===");
+			Console.WriteLine("ЛАБОРАТОРНАЯ РАБОТА 3");
 			Console.WriteLine("Коллекции, сравнение объектов\n");
 			Console.WriteLine("1. Подсчет частоты слов");
 			Console.WriteLine("2. Динамический массив (DynamicArray<T>)");
@@ -61,7 +61,7 @@ namespace Lab3
 		private static void Task1()
 		{
 			Console.Clear();
-			Console.WriteLine("=== Задание 1: Подсчет частоты слов ===\n");
+			Console.WriteLine("Задание 1: Подсчет частоты слов\n");
 
 			Console.WriteLine("Введите текст на английском языке:");
 			var text = Console.ReadLine();
@@ -81,7 +81,7 @@ namespace Lab3
 		private static void Task2()
 		{
 			Console.Clear();
-			Console.WriteLine("=== Задание 2: Динамический массив ===\n");
+			Console.WriteLine("Задание 2: Динамический массив\n");
 
 			var array = new DynamicArray<int>();
 			Console.WriteLine($"Создан массив с емкостью: {array.Capacity}");
@@ -135,7 +135,7 @@ namespace Lab3
 		private static void Task3()
 		{
 			Console.Clear();
-			Console.WriteLine("=== Задание 3: Демонстрация сравнения объектов ===\n");
+			Console.WriteLine("Задание 3: Демонстрация сравнения объектов\n");
 
 			ObjectComparison.DemonstrateDynamicArrayComparison();
 			ObjectComparison.DemonstrateSampleClassComparison();

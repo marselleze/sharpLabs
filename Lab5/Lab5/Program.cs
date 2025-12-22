@@ -63,7 +63,7 @@ namespace Lab5
 		private static void Task1()
 		{
 			Console.Clear();
-			Console.WriteLine("=== Задание 1: Сохранение объекта Student ===\n");
+			Console.WriteLine("Задание 1: Сохранение объекта Student\n");
 
 			var student = new Student(1, "Иван", "Иванов", 20, 4.5)
 			{
@@ -80,7 +80,7 @@ namespace Lab5
 		private static void Task2()
 		{
 			Console.Clear();
-			Console.WriteLine("=== Задание 2: Сохранение коллекции студентов ===\n");
+			Console.WriteLine("Задание 2: Сохранение коллекции студентов\n");
 
 			var students = JsonStorage.CreateSampleStudents();
 
@@ -97,7 +97,7 @@ namespace Lab5
 		private static void Task3()
 		{
 			Console.Clear();
-			Console.WriteLine("=== Задание 3: Загрузка данных из JSON ===\n");
+			Console.WriteLine("Задание 3: Загрузка данных из JSON\n");
 
 			var filePath = GetConfigFilePath() ?? "students.json";
 
@@ -129,7 +129,7 @@ namespace Lab5
 		private static void Task4()
 		{
 			Console.Clear();
-			Console.WriteLine("=== Задание 4: Конфигурация из App.config ===\n");
+			Console.WriteLine("Задание 4: Конфигурация из App.config\n");
 
 			var filePath = ConfigurationManager.AppSettings["JsonFilePath"];
 

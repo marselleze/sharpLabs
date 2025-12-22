@@ -49,7 +49,7 @@ namespace Lab4
 		private static void DisplayMenu()
 		{
 			Console.Clear();
-			Console.WriteLine("=== ЛАБОРАТОРНАЯ РАБОТА 4 ===");
+			Console.WriteLine("ЛАБОРАТОРНАЯ РАБОТА 4");
 			Console.WriteLine("Делегаты и события\n");
 			Console.WriteLine("1. Сортировка массива через делегат");
 			Console.WriteLine("2. Сортировка с событиями (GenericArraySorter)");
@@ -62,7 +62,7 @@ namespace Lab4
 		private static void Task1()
 		{
 			Console.Clear();
-			Console.WriteLine("=== Задание 1: Сортировка через делегат ===\n");
+			Console.WriteLine("Задание 1: Сортировка через делегат\n");
 
 			var numbers = new[] { 64, 34, 25, 12, 22, 11, 90 };
 			Console.WriteLine($"Исходный массив: [{string.Join(", ", numbers)}]");
@@ -76,7 +76,7 @@ namespace Lab4
 		private static void Task2()
 		{
 			Console.Clear();
-			Console.WriteLine("=== Задание 2: Сортировка с событиями ===\n");
+			Console.WriteLine("Задание 2: Сортировка с событиями\n");
 
 			var numbers = new[] { 64, 34, 25, 12, 22, 11, 90, 88, 45, 50 };
 			Console.WriteLine($"Исходный: [{string.Join(", ", numbers)}]");
@@ -100,7 +100,7 @@ namespace Lab4
 		private static void Task3()
 		{
 			Console.Clear();
-			Console.WriteLine("=== Задание 3: Демонстрация событий ===\n");
+			Console.WriteLine("Задание 3: Демонстрация событий\n");
 
 			var notifier = new OperationNotifier();
 			notifier.OperationStarting += (sender, e) =>
@@ -122,7 +122,7 @@ namespace Lab4
 		private static void Task4()
 		{
 			Console.Clear();
-			Console.WriteLine("=== Задание 4: Демонстрация лямбда-выражений ===\n");
+			Console.WriteLine("Задание 4: Демонстрация лямбда-выражений\n");
 
 			DelegateExamples.DemonstrateAction();
 			Console.WriteLine();
